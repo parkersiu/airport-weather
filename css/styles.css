@@ -44,3 +44,7 @@ input {
   border-radius: 3px;
   padding: 5px;
 }
+
+.hidden {
+  display: none;
+}
