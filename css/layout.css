@@ -1,15 +1,39 @@
 .container {
   margin: 0 auto;
+  max-width: 575px;
 }
 
 .row {
   display: flex;
 }
 
-.margin-10 {
-  margin: 0 15rem;
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.margin-5 {
+  margin: 0 5rem;
 }
 
 .margin-1 {
   margin: 1rem 0;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .column-full,
+  .column-half {
+    padding: 0 0.75rem;
+  }
+
+  .column-half {
+    width: 50%;
+  }
 }
