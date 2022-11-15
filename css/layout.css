@@ -5,3 +5,11 @@
 .row {
   display: flex;
 }
+
+.margin-10 {
+  margin: 0 15rem;
+}
+
+.margin-1 {
+  margin: 1rem 0;
+}
