@@ -37,10 +37,6 @@ button:hover {
   cursor: pointer;
 }
 
-.block {
-  display: block;
-}
-
 input {
   width: 100%;
   background-color: white;
