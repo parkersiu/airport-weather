@@ -1,0 +1,46 @@
+body {
+  background-color: #f6f6f6;
+}
+
+header {
+  background-color: #3e92cc;
+  color: white;
+}
+
+nav {
+  padding: 10px 0;
+}
+
+.nav {
+  padding: 0 20px;
+  display: inline;
+}
+
+.nav:link,
+.nav:visited,
+.nav:hover,
+.nav:active {
+  color: white;
+  text-decoration: none;
+}
+
+.go-button {
+  background-color: #3e92cc;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 5px 10px;
+  float: right;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 5px;
+}
