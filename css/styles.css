@@ -1,0 +1,22 @@
+header {
+  background-color: #3e92cc;
+  color: white;
+}
+
+nav {
+  margin: 0 5rem;
+  padding: 10px 0;
+}
+
+.nav {
+  padding: 0 20px;
+  display: inline;
+}
+
+.nav:link,
+.nav:visited,
+.nav:hover,
+.nav:active {
+  color: white;
+  text-decoration: none;
+}
