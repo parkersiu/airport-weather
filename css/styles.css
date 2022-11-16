@@ -48,3 +48,42 @@ input {
 .hidden {
   display: none;
 }
+
+.rectangle {
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 1rem 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+li:nth-child(odd) {
+  font-size: 125%;
+}
+
+li:nth-child(even) {
+  font-size: 75%;
+}
+
+.diagram {
+  background-color: #3e92cc;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 5px 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+ul {
+  padding: 0 1rem;
+}
