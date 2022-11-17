@@ -1,12 +1,39 @@
 var $searchinput = document.getElementById('airport');
 var $form = document.querySelector('form');
 var $ul = document.querySelector('ul');
+var $navbar = document.querySelector('nav');
+var $airportdiv = document.getElementById('airport-div');
+var $searchdiv = document.getElementById('search-div');
 
 $form.addEventListener('submit', function (event) {
-  data.airport = $searchinput.value;
+  data.airport = $searchinput.value.toUpperCase();
   $form.reset();
   event.preventDefault();
+  data.view = 'airport';
+  viewSwitcher(data.view);
 });
+
+$navbar.addEventListener('click', function (event) {
+  if (event.target.textContent === 'Search') {
+    data.view = 'search';
+  } else if (event.target.textContent === 'Favorites') {
+    data.view = 'favorites';
+  }
+  viewSwitcher(data.view);
+});
+
+function viewSwitcher(view) {
+  if (view === 'search') {
+    $searchdiv.className = '';
+    $airportdiv.className = 'hidden';
+  } else if (view === 'airport') {
+    $searchdiv.className = 'hidden';
+    $airportdiv.className = '';
+  } else if (view === 'favorites') {
+    $searchdiv.className = '';
+    $airportdiv.className = '';
+  }
+}
 
 function renderWeather(airport) {
   var metar = document.createElement('li');

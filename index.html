@@ -16,42 +16,46 @@
     </div>
   </header>
   <main>
-    <div data-view="search" class="container hidden">
-      <form class="margin-5">
-        <div class="row">
-          <div class="column-full">
-            <h1>Search</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-full">
-            <label for="airport" class="block">Airport ICAO Identifier:</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-full">
-            <input type="text" placeholder="Ex: KLAX" id="airport" class="block margin-1" required>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-full">
-            <button type="submit" class="go-button" id="search-go">Go</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div data-view="airport" class="margin-5">
+    <div data-view="search" class="hidden" id="search-div">
       <div class="container">
-        <div class="row">
-          <div class="column-full">
-            <h1>KLAX</h1>
+        <form class="margin-5">
+          <div class="row">
+            <div class="column-full">
+              <h1>Search</h1>
+            </div>
           </div>
-        </div>
-        <div class="row rectangle">
-          <div class="column-full text-center">
-            <ul class="text-left">
-            </ul>
-            <a class="diagram">Airport Diagram</a>
+          <div class="row">
+            <div class="column-full">
+              <label for="airport" class="block">Airport ICAO Identifier:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <input type="text" placeholder="Ex: KLAX" id="airport" class="block margin-1" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <button type="submit" class="go-button" id="search-go">Go</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="" id="airport-div">
+      <div data-view="airport" class="margin-5">
+        <div class="container">
+          <div class="row">
+            <div class="column-full">
+              <h1>KLAX</h1>
+            </div>
+          </div>
+          <div class="row rectangle">
+            <div class="column-full text-center">
+              <ul class="text-left">
+              </ul>
+              <a class="diagram">Airport Diagram</a>
+            </div>
           </div>
         </div>
       </div>
