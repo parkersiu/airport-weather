@@ -66,7 +66,7 @@ function renderWeather(airport) {
   temp.textContent = 'Temperature / Dewpoint';
   $ul.appendChild(temp);
   var tempData = document.createElement('li');
-  tempData.textContent = airport.temp + ' / ' + airport.dewpoint + 'C';
+  tempData.textContent = airport.temp + 'C / ' + airport.dewpoint + 'C';
   $ul.appendChild(tempData);
   var wind = document.createElement('li');
   wind.textContent = 'Wind:';
