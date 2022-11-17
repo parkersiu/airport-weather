@@ -10,21 +10,20 @@ $form.addEventListener('submit', function (event) {
   data.airport = $searchinput.value.toUpperCase();
   $form.reset();
   event.preventDefault();
-  data.view = 'airport';
-  viewSwitcher(data.view);
+  viewSwitcher('airport');
   getAirportWeather(data.airport);
 });
 
 $navbar.addEventListener('click', function (event) {
   if (event.target.textContent === 'Search') {
-    data.view = 'search';
+    viewSwitcher('search');
   } else if (event.target.textContent === 'Favorites') {
-    data.view = 'favorites';
+    viewSwitcher('airport');
   }
-  viewSwitcher(data.view);
 });
 
 function viewSwitcher(view) {
+  data.view = view;
   if (view === 'search') {
     $searchdiv.className = '';
     $airportdiv.className = 'hidden';
@@ -102,5 +101,3 @@ function getAirportWeather(airport) {
   });
   xhr.send();
 }
-
-getAirportWeather(data.airport);
