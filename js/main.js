@@ -6,6 +6,11 @@ var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
 
+window.addEventListener('load', function (event) {
+  viewSwitcher(data.view);
+  getAirportWeather(data.airport);
+});
+
 $form.addEventListener('submit', function (event) {
   data.airport = $searchinput.value.toUpperCase();
   $form.reset();
