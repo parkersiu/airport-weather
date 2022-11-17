@@ -12,6 +12,7 @@ $form.addEventListener('submit', function (event) {
   event.preventDefault();
   data.view = 'airport';
   viewSwitcher(data.view);
+  getAirportWeather(data.airport);
 });
 
 $navbar.addEventListener('click', function (event) {
@@ -37,6 +38,7 @@ function viewSwitcher(view) {
 }
 
 function renderWeather(airport) {
+  $ul.replaceChildren();
   $h1.textContent = data.airport + ' Weather';
   var metar = document.createElement('li');
   metar.textContent = 'METAR (Raw):';
