@@ -37,8 +37,13 @@ nav {
   float: right;
 }
 
+i {
+  padding: 0 1rem;
+}
+
 button:hover,
-a:hover {
+a:hover,
+i:hover {
   cursor: pointer;
 }
 
@@ -91,4 +96,8 @@ li:nth-child(even) {
 
 ul {
   padding: 0 1rem;
+}
+
+.inline {
+  display: inline-block;
 }
