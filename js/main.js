@@ -5,10 +5,13 @@ var $navbar = document.querySelector('nav');
 var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
+var $star = document.querySelector('i');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
-  getAirportWeather(data.airport);
+  if (data.view === 'airport') {
+    getAirportWeather(data.airport);
+  }
 });
 
 $form.addEventListener('submit', function (event) {
@@ -24,6 +27,20 @@ $navbar.addEventListener('click', function (event) {
     viewSwitcher('search');
   } else if (event.target.textContent === 'Favorites') {
     viewSwitcher('airport');
+  }
+});
+
+$star.addEventListener('click', function (event) {
+  if (event.target.className === 'fa-regular fa-star') {
+    event.target.className = 'fa-solid fa-star';
+    data.favorites.push(data.airport);
+  } else if (event.target.className === 'fa-solid fa-star') {
+    event.target.className = 'fa-regular fa-star';
+    for (var i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i] === data.airport) {
+        data.favorites.splice(i, 1);
+      }
+    }
   }
 });
 
