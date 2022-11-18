@@ -5,10 +5,13 @@ var $navbar = document.querySelector('nav');
 var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
+var $star = document.querySelector('i');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
-  getAirportWeather(data.airport);
+  if (data.view === 'airport') {
+    getAirportWeather(data.airport);
+  }
 });
 
 $form.addEventListener('submit', function (event) {
@@ -27,6 +30,20 @@ $navbar.addEventListener('click', function (event) {
   }
 });
 
+$star.addEventListener('click', function (event) {
+  if (event.target.className === 'fa-regular fa-star') {
+    event.target.className = 'fa-solid fa-star';
+    data.favorites.push(data.airport);
+  } else if (event.target.className === 'fa-solid fa-star') {
+    event.target.className = 'fa-regular fa-star';
+    for (var i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i] === data.airport) {
+        data.favorites.splice(i, 1);
+      }
+    }
+  }
+});
+
 function viewSwitcher(view) {
   data.view = view;
   if (view === 'search') {
@@ -42,6 +59,13 @@ function viewSwitcher(view) {
 }
 
 function renderWeather(airport) {
+  for (var i = 0; i < data.favorites.length; i++) {
+    if (data.favorites[i] === data.airport) {
+      $star.className = 'fa-solid fa-star';
+    } else {
+      $star.className = 'fa-regular fa-star';
+    }
+  }
   $ul.replaceChildren();
   $h1.textContent = data.airport + ' Weather';
   var metar = document.createElement('li');
@@ -84,11 +108,11 @@ function renderWeather(airport) {
   sky.textContent = 'Sky Conditions:';
   $ul.appendChild(sky);
   var skyData = document.createElement('li');
-  for (var i = 0; i < airport.sky_conditions.length; i++) {
-    if (airport.sky_conditions[i].base_agl === null) {
-      skyData.textContent = airport.sky_conditions[i].coverage;
-    } else if (airport.sky_conditions[i].base_agl !== null) {
-      skyData.textContent = airport.sky_conditions[i].coverage + ' at ' + airport.sky_conditions[i].base_agl + ' AGL';
+  for (var j = 0; j < airport.sky_conditions.length; j++) {
+    if (airport.sky_conditions[j].base_agl === null) {
+      skyData.textContent = airport.sky_conditions[j].coverage;
+    } else if (airport.sky_conditions[j].base_agl !== null) {
+      skyData.textContent = airport.sky_conditions[j].coverage + ' at ' + airport.sky_conditions[j].base_agl + ' AGL';
     }
   }
   $ul.appendChild(skyData);
