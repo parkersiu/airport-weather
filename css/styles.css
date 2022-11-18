@@ -101,3 +101,13 @@ ul {
 .inline {
   display: inline-block;
 }
+
+.align-center {
+  align-items: center;
+}
+
+.fav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
