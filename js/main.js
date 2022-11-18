@@ -1,11 +1,12 @@
 var $searchinput = document.getElementById('airport');
 var $form = document.querySelector('form');
-var $ul = document.querySelector('ul');
+var $ul = document.getElementById('weather-list');
 var $navbar = document.querySelector('nav');
 var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
-var $star = document.querySelector('i');
+var $star = document.getElementById('star');
+var $favoritesdiv = document.getElementById();
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
@@ -26,7 +27,7 @@ $navbar.addEventListener('click', function (event) {
   if (event.target.textContent === 'Search') {
     viewSwitcher('search');
   } else if (event.target.textContent === 'Favorites') {
-    viewSwitcher('airport');
+    viewSwitcher('favorites');
   }
 });
 
@@ -49,12 +50,15 @@ function viewSwitcher(view) {
   if (view === 'search') {
     $searchdiv.className = '';
     $airportdiv.className = 'hidden';
+    $favoritesdiv.className = 'hidden';
   } else if (view === 'airport') {
     $searchdiv.className = 'hidden';
     $airportdiv.className = '';
+    $favoritesdiv.className = 'hidden';
   } else if (view === 'favorites') {
-    $searchdiv.className = '';
-    $airportdiv.className = '';
+    $searchdiv.className = 'hidden';
+    $airportdiv.className = 'hidden';
+    $favoritesdiv.className = '';
   }
 }
 
