@@ -162,3 +162,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
     renderWeather(data.airport);
   }
 });
+
+$favoritesparent.addEventListener('click', function (event) {
+  if (event.target.textContent === 'Go') {
+    var id = event.target.closest('div');
+    var p = id.querySelector('p');
+    data.airport = p.textContent.toUpperCase();
+    /* event.preventDefault(); */
+    viewSwitcher('airport');
+    getAirportWeather(data.airport);
+  }
+});
