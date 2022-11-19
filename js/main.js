@@ -11,9 +11,6 @@ var $favoritesparent = document.getElementById('favorites-parent');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
-  if (data.view === 'airport') {
-    getAirportWeather(data.airport);
-  }
 });
 
 $form.addEventListener('submit', function (event) {
@@ -156,5 +153,12 @@ function renderFavorites(airport) {
   column.appendChild(icon);
 }
 
-renderFavorites('KSAN');
-renderFavorites('KLAX');
+document.addEventListener('DOMContentLoaded', function (event) {
+  if (data.view === 'favorites') {
+    for (var i = 0; i < data.favorites.length; i++) {
+      renderFavorites(data.favorites[i]);
+    }
+  } else if (data.view === 'airport') {
+    renderWeather(data.airport);
+  }
+});
