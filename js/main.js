@@ -6,7 +6,8 @@ var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
 var $star = document.getElementById('star');
-var $favoritesdiv = document.getElementById();
+var $favoritesdiv = document.getElementById('favorites-div');
+var $favoritesparent = document.getElementById('favorites-parent');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
@@ -134,3 +135,26 @@ function getAirportWeather(airport) {
   });
   xhr.send();
 }
+
+function renderFavorites(airport) {
+  var row = document.createElement('div');
+  row.className = 'row align-center';
+  $favoritesparent.appendChild(row);
+  var column = document.createElement('div');
+  column.className = 'column-half fav';
+  row.appendChild(column);
+  var p = document.createElement('p');
+  p.textContent = airport;
+  column.appendChild(p);
+  var button = document.createElement('button');
+  button.setAttribute('type', 'submit');
+  button.className = 'go-button inline';
+  button.textContent = 'Go';
+  column.appendChild(button);
+  var icon = document.createElement('i');
+  icon.className = 'fa-solid fa-trash';
+  column.appendChild(icon);
+}
+
+renderFavorites('KSAN');
+renderFavorites('KLAX');
