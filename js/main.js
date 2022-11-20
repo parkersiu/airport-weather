@@ -134,12 +134,9 @@ function getAirportWeather(airport) {
 }
 
 function renderFavorites(airport) {
-  var row = document.createElement('div');
-  row.className = 'row align-center';
-  $favoritesparent.appendChild(row);
   var column = document.createElement('div');
   column.className = 'column-half fav';
-  row.appendChild(column);
+  $favoritesparent.appendChild(column);
   var p = document.createElement('p');
   p.textContent = airport;
   column.appendChild(p);
@@ -159,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
       renderFavorites(data.favorites[i]);
     }
   } else if (data.view === 'airport') {
-    renderWeather(data.airport);
+    getAirportWeather(data.airport);
   }
 });
 
@@ -168,7 +165,6 @@ $favoritesparent.addEventListener('click', function (event) {
     var id = event.target.closest('div');
     var p = id.querySelector('p');
     data.airport = p.textContent.toUpperCase();
-    /* event.preventDefault(); */
     viewSwitcher('airport');
     getAirportWeather(data.airport);
   }
