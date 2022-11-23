@@ -33,7 +33,9 @@ $navbar.addEventListener('click', function (event) {
 $star.addEventListener('click', function (event) {
   if (event.target.className === 'fa-regular fa-star') {
     event.target.className = 'fa-solid fa-star';
-    data.favorites.push(data.airport);
+    if (!data.favorites.includes(data.airport)) {
+      data.favorites.push(data.airport);
+    }
   } else if (event.target.className === 'fa-solid fa-star') {
     event.target.className = 'fa-regular fa-star';
     for (var i = 0; i < data.favorites.length; i++) {
