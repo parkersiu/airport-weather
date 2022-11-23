@@ -62,7 +62,7 @@ function viewSwitcher(view) {
 
 function renderWeather(airport) {
   for (var i = 0; i < data.favorites.length; i++) {
-    if (data.favorites[i] === data.airport) {
+    if (data.airport === data.favorites[i]) {
       $star.className = 'fa-solid fa-star';
     } else {
       $star.className = 'fa-regular fa-star';
