@@ -37,7 +37,7 @@ nav {
   float: right;
 }
 
-i {
+#star {
   padding: 0 1rem;
 }
 
@@ -100,4 +100,14 @@ ul {
 
 .inline {
   display: inline-block;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.fav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

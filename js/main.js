@@ -1,17 +1,16 @@
 var $searchinput = document.getElementById('airport');
 var $form = document.querySelector('form');
-var $ul = document.querySelector('ul');
+var $ul = document.getElementById('weather-list');
 var $navbar = document.querySelector('nav');
 var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
-var $star = document.querySelector('i');
+var $star = document.getElementById('star');
+var $favoritesdiv = document.getElementById('favorites-div');
+var $favoritesparent = document.getElementById('favorites-parent');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
-  if (data.view === 'airport') {
-    getAirportWeather(data.airport);
-  }
 });
 
 $form.addEventListener('submit', function (event) {
@@ -26,14 +25,17 @@ $navbar.addEventListener('click', function (event) {
   if (event.target.textContent === 'Search') {
     viewSwitcher('search');
   } else if (event.target.textContent === 'Favorites') {
-    viewSwitcher('airport');
+    viewSwitcher('favorites');
+    renderFavorites(data.favorites);
   }
 });
 
 $star.addEventListener('click', function (event) {
   if (event.target.className === 'fa-regular fa-star') {
     event.target.className = 'fa-solid fa-star';
-    data.favorites.push(data.airport);
+    if (!data.favorites.includes(data.airport)) {
+      data.favorites.push(data.airport);
+    }
   } else if (event.target.className === 'fa-solid fa-star') {
     event.target.className = 'fa-regular fa-star';
     for (var i = 0; i < data.favorites.length; i++) {
@@ -49,21 +51,23 @@ function viewSwitcher(view) {
   if (view === 'search') {
     $searchdiv.className = '';
     $airportdiv.className = 'hidden';
+    $favoritesdiv.className = 'hidden';
   } else if (view === 'airport') {
     $searchdiv.className = 'hidden';
     $airportdiv.className = '';
+    $favoritesdiv.className = 'hidden';
   } else if (view === 'favorites') {
-    $searchdiv.className = '';
-    $airportdiv.className = '';
+    $searchdiv.className = 'hidden';
+    $airportdiv.className = 'hidden';
+    $favoritesdiv.className = '';
   }
 }
 
 function renderWeather(airport) {
+  $star.className = 'fa-regular fa-star';
   for (var i = 0; i < data.favorites.length; i++) {
-    if (data.favorites[i] === data.airport) {
+    if (data.airport === data.favorites[i]) {
       $star.className = 'fa-solid fa-star';
-    } else {
-      $star.className = 'fa-regular fa-star';
     }
   }
   $ul.replaceChildren();
@@ -130,3 +134,41 @@ function getAirportWeather(airport) {
   });
   xhr.send();
 }
+
+function renderFavorites(favorites) {
+  $favoritesparent.replaceChildren();
+  for (var i = 0; i < favorites.length; i++) {
+    var column = document.createElement('div');
+    column.className = 'column-half fav';
+    $favoritesparent.appendChild(column);
+    var p = document.createElement('p');
+    p.textContent = favorites[i];
+    column.appendChild(p);
+    var button = document.createElement('button');
+    button.setAttribute('type', 'submit');
+    button.className = 'go-button inline';
+    button.textContent = 'Go';
+    column.appendChild(button);
+    var icon = document.createElement('i');
+    icon.className = 'fa-solid fa-trash';
+    column.appendChild(icon);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  if (data.view === 'favorites') {
+    renderFavorites(data.favorites);
+  } else if (data.view === 'airport') {
+    getAirportWeather(data.airport);
+  }
+});
+
+$favoritesparent.addEventListener('click', function (event) {
+  if (event.target.textContent === 'Go') {
+    var id = event.target.closest('div');
+    var p = id.querySelector('p');
+    data.airport = p.textContent.toUpperCase();
+    viewSwitcher('airport');
+    getAirportWeather(data.airport);
+  }
+});
