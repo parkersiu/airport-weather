@@ -26,6 +26,7 @@ $navbar.addEventListener('click', function (event) {
     viewSwitcher('search');
   } else if (event.target.textContent === 'Favorites') {
     viewSwitcher('favorites');
+    renderFavorites(data.favorites);
   }
 });
 
@@ -133,28 +134,29 @@ function getAirportWeather(airport) {
   xhr.send();
 }
 
-function renderFavorites(airport) {
-  var column = document.createElement('div');
-  column.className = 'column-half fav';
-  $favoritesparent.appendChild(column);
-  var p = document.createElement('p');
-  p.textContent = airport;
-  column.appendChild(p);
-  var button = document.createElement('button');
-  button.setAttribute('type', 'submit');
-  button.className = 'go-button inline';
-  button.textContent = 'Go';
-  column.appendChild(button);
-  var icon = document.createElement('i');
-  icon.className = 'fa-solid fa-trash';
-  column.appendChild(icon);
+function renderFavorites(favorites) {
+  $favoritesparent.replaceChildren();
+  for (var i = 0; i < favorites.length; i++) {
+    var column = document.createElement('div');
+    column.className = 'column-half fav';
+    $favoritesparent.appendChild(column);
+    var p = document.createElement('p');
+    p.textContent = favorites[i];
+    column.appendChild(p);
+    var button = document.createElement('button');
+    button.setAttribute('type', 'submit');
+    button.className = 'go-button inline';
+    button.textContent = 'Go';
+    column.appendChild(button);
+    var icon = document.createElement('i');
+    icon.className = 'fa-solid fa-trash';
+    column.appendChild(icon);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
   if (data.view === 'favorites') {
-    for (var i = 0; i < data.favorites.length; i++) {
-      renderFavorites(data.favorites[i]);
-    }
+    renderFavorites(data.favorites);
   } else if (data.view === 'airport') {
     getAirportWeather(data.airport);
   }
