@@ -64,11 +64,10 @@ function viewSwitcher(view) {
 }
 
 function renderWeather(airport) {
+  $star.className = 'fa-regular fa-star';
   for (var i = 0; i < data.favorites.length; i++) {
     if (data.airport === data.favorites[i]) {
       $star.className = 'fa-solid fa-star';
-    } else {
-      $star.className = 'fa-regular fa-star';
     }
   }
   $ul.replaceChildren();
