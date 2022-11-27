@@ -123,10 +123,9 @@ ul {
   position: relative;
   text-align: center;
   background-color: white;
-  margin: 30% 0;
-  width: auto;
+  margin: 15rem 5rem;
   border-radius: 5px;
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 .cancel {
@@ -138,7 +137,11 @@ ul {
   margin: 20px auto;
 }
 
-p {
-  margin: 0;
-  padding: 0;
+.confirm {
+  background-color: #3e92cc;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px auto;
 }
