@@ -172,6 +172,11 @@ $favoritesparent.addEventListener('click', function (event) {
     data.airport = p.textContent.toUpperCase();
     viewSwitcher('airport');
     getAirportWeather(data.airport);
+  } else if (event.target.className === 'fa-solid fa-trash') {
+    $modalcontainer.className = 'row';
+    var idDelete = event.target.closest('div');
+    var pDelete = idDelete.querySelector('p');
+    data.airport = pDelete.textContent;
   }
 });
 
@@ -182,6 +187,8 @@ $modal.addEventListener('click', function (event) {
         data.favorites.splice(i, 1);
       }
     }
+    $modalcontainer.className = 'row hidden';
+    renderFavorites(data.favorites);
   } else if (event.target.className === 'cancel') {
     $modalcontainer.className = 'row hidden';
   }
