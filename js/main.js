@@ -8,6 +8,8 @@ var $h1 = document.getElementById('airport-h1');
 var $star = document.getElementById('star');
 var $favoritesdiv = document.getElementById('favorites-div');
 var $favoritesparent = document.getElementById('favorites-parent');
+var $modal = document.getElementById('modal');
+var $modalcontainer = document.getElementById('modal-container');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
@@ -170,5 +172,24 @@ $favoritesparent.addEventListener('click', function (event) {
     data.airport = p.textContent.toUpperCase();
     viewSwitcher('airport');
     getAirportWeather(data.airport);
+  } else if (event.target.className === 'fa-solid fa-trash') {
+    $modalcontainer.className = 'row';
+    var idDelete = event.target.closest('div');
+    var pDelete = idDelete.querySelector('p');
+    data.airport = pDelete.textContent;
+  }
+});
+
+$modal.addEventListener('click', function (event) {
+  if (event.target.className === 'confirm') {
+    for (var i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i] === data.airport) {
+        data.favorites.splice(i, 1);
+      }
+    }
+    $modalcontainer.className = 'row hidden';
+    renderFavorites(data.favorites);
+  } else if (event.target.className === 'cancel') {
+    $modalcontainer.className = 'row hidden';
   }
 });
