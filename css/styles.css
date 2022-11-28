@@ -110,6 +110,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 1rem;
 }
 
 #modal-container {
@@ -123,18 +124,20 @@ ul {
   position: relative;
   text-align: center;
   background-color: white;
-  margin: 15rem 5rem;
+  margin: 20rem 3rem;
   border-radius: 5px;
   padding-top: 3rem;
+  align-items: center;
 }
 
 .cancel {
-  background-color: red;
+  background-color: #e74c3c;
   border: none;
   border-radius: 5px;
   color: white;
   padding: 10px 20px;
-  margin: 20px auto;
+  margin: 20px 0;
+  margin-right: 1rem;
 }
 
 .confirm {
@@ -143,5 +146,6 @@ ul {
   border-radius: 5px;
   color: white;
   padding: 10px 20px;
-  margin: 20px auto;
+  margin: 20px 0;
+  margin-left: 1rem;
 }
