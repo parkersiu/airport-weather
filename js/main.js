@@ -167,15 +167,15 @@ function renderFavorites(favorites) {
   } else {
     for (var i = 0; i < favorites.length; i++) {
       var column = document.createElement('div');
-      column.className = 'p-2';
+      column.className = 'p-2 text-center';
       $favoritesparent.appendChild(column);
       var p = document.createElement('p');
       p.textContent = favorites[i];
-      p.className = 'd-inline me-5';
+      p.className = 'd-inline me-3';
       column.appendChild(p);
       var button = document.createElement('button');
       button.setAttribute('type', 'submit');
-      button.className = 'btn btn-primary me-5';
+      button.className = 'btn btn-primary me-3';
       button.textContent = 'Go';
       column.appendChild(button);
       var icon = document.createElement('i');
