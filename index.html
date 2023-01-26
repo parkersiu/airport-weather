@@ -3,83 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
+  <title>Airport Info</title>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="row hidden" id="modal-container">
-    <div class="column-full" id="modal">
-      <p>Are you sure you want to delete this entry?</p>
-      <button class="cancel">Cancel</button>
-      <button class="confirm">Confirm</button>
+  <div class="container d-none" id="modal-container">
+    <div class="row">
+      <div class="col" id="modal">
+        <p>Are you sure you want to delete this entry?</p>
+        <button type="button" class="btn btn-danger me-3 mt-3 mb-3">Cancel</button>
+        <button type="button" class="btn btn-info ms-3 mt-3 mb-3">Confirm</button>
+      </div>
     </div>
   </div>
   <header>
-    <div class="container">
-      <nav><h2 class="nav">Airport Info</h2><a href="#" class="nav">Search</a><a href="#" class="nav">Favorites</a></nav>
+    <div class="container-fluid" id="navcontainer">
+      <div class="container">
+        <nav class="navbar navbar-expand">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Airport Info</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Search</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#favorites">Favorites</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
   </header>
   <main>
-    <div data-view="search" class="hidden" id="search-div">
-      <div class="container">
-        <form class="margin-5">
-          <div class="row">
-            <div class="column-full">
-              <h1>Search</h1>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <label for="airport" class="block">Airport ICAO Identifier:</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <input type="text" placeholder="Ex: KLAX" id="airport" class="block margin-1" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <button type="submit" class="go-button" id="search-go">Go</button>
-            </div>
-          </div>
-        </form>
+    <div class="container d-none" data-view="search" id="search-div">
+      <div class="col mt-3"></div>
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col">
+          <h1 class="mb-4">Search</h1>
+          <form>
+            <label for="airport" class="form-label">Airport ICAO Identifier:</label>
+            <input type="text" placeholder="Ex: KLAX" id="airport" class="form-control" required>
+            <button type="submit" class="btn btn-primary float-end mt-2">Go</button>
+          </form>
+        </div>
+        <div class="col-2"></div>
       </div>
     </div>
-    <div class="hidden" id="airport-div">
-      <div data-view="airport" class="margin-5">
-        <div class="container">
-          <div class="row">
-            <div class="column-full flex">
-              <h1 id="airport-h1" class="inline"></h1>
-              <i class="fa-regular fa-star" id="star"></i>
-            </div>
-          </div>
-          <div class="row rectangle">
-            <div class="column-full text-center">
-              <ul class="text-left" id="weather-list">
-              </ul>
-              <a class="diagram">Airport Diagram</a>
-            </div>
-          </div>
+    <div class="container" data-view="airport" id="airport-div">
+      <div class="row mt-3">
+        <div class="col-2"></div>
+        <div class="col">
+          <h1 class="d-inline" id="airport-h1"></h1>
+          <i class="fa-regular fa-star" id="star"></i>
         </div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-1"></div>
+        <div class="col border rounded white-box">
+          <div class="text-center visually-hidden" id="spinner">
+            <div class="spinner-border m-5" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <ul class="mt-3" id="weather-list">
+          </ul>
+        </div>
+        <div class="col-1"></div>
       </div>
     </div>
-    <div id="favorites-div" class="">
-      <div data-view="favorites" class="margin-5">
-        <div class="container">
-          <div class="row">
-            <div class="column-full">
-              <h1>Favorites</h1>
-            </div>
-          </div>
-          <div class="rectangle row wrap" id="favorites-parent">
-          </div>
+    <div class="container" data-view="favorites" id="favorites-div">
+      <div class="row mt-3">
+        <div class="col-2"></div>
+        <div class="col">
+          <h1>Favorites</h1>
         </div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-1"></div>
+        <div class="col">
+          <div class="container border rounded white-box" id="favorites-parent"></div>
+        </div>
+        <div class="col-1"></div>
       </div>
     </div>
   </main>

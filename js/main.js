@@ -1,15 +1,16 @@
 var $searchinput = document.getElementById('airport');
 var $form = document.querySelector('form');
 var $ul = document.getElementById('weather-list');
-var $navbar = document.querySelector('nav');
+var $navbar = document.getElementById('navcontainer');
 var $airportdiv = document.getElementById('airport-div');
 var $searchdiv = document.getElementById('search-div');
 var $h1 = document.getElementById('airport-h1');
 var $star = document.getElementById('star');
 var $favoritesdiv = document.getElementById('favorites-div');
 var $favoritesparent = document.getElementById('favorites-parent');
-var $modal = document.getElementById('modal');
+var $modal = document.getElementById('modal-container');
 var $modalcontainer = document.getElementById('modal-container');
+var $spinner = document.getElementById('spinner');
 
 window.addEventListener('load', function (event) {
   viewSwitcher(data.view);
@@ -51,18 +52,26 @@ $star.addEventListener('click', function (event) {
 function viewSwitcher(view) {
   data.view = view;
   if (view === 'search') {
-    $searchdiv.className = '';
-    $airportdiv.className = 'hidden';
-    $favoritesdiv.className = 'hidden';
+    $searchdiv.className = 'container';
+    $airportdiv.className = 'container d-none';
+    $favoritesdiv.className = 'd-none';
   } else if (view === 'airport') {
-    $searchdiv.className = 'hidden';
-    $airportdiv.className = '';
-    $favoritesdiv.className = 'hidden';
+    $searchdiv.className = 'container d-none';
+    $airportdiv.className = 'container';
+    $favoritesdiv.className = 'd-none';
   } else if (view === 'favorites') {
-    $searchdiv.className = 'hidden';
-    $airportdiv.className = 'hidden';
+    $searchdiv.className = 'container d-none';
+    $airportdiv.className = 'container d-none';
     $favoritesdiv.className = '';
   }
+}
+
+function renderError() {
+  $star.className = 'fa-regular fa-star d-none';
+  $ul.replaceChildren();
+  var p = document.createElement('p');
+  p.textContent = 'Could not find the airport you provided. Please search using a four letter ICAO identifier';
+  $ul.appendChild(p);
 }
 
 function renderWeather(airport) {
@@ -125,35 +134,54 @@ function renderWeather(airport) {
 }
 
 function getAirportWeather(airport) {
+  $spinner.className = 'text-center';
   var targetUrl = encodeURIComponent('https://api.aviationapi.com/v1/weather/metar?apt=' + airport);
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    data.weather = xhr.response;
-    renderWeather(xhr.response[airport.toUpperCase()]);
+    if (xhr.status === 200) {
+      $spinner.className = 'text-center visually-hidden';
+      data.weather = xhr.response;
+      renderWeather(xhr.response[airport.toUpperCase()]);
+    }
+    if (xhr.status === 404) {
+      $spinner.className = 'text-center visually-hidden';
+      renderError();
+    }
   });
   xhr.send();
 }
 
 function renderFavorites(favorites) {
   $favoritesparent.replaceChildren();
-  for (var i = 0; i < favorites.length; i++) {
-    var column = document.createElement('div');
-    column.className = 'column-half fav';
-    $favoritesparent.appendChild(column);
-    var p = document.createElement('p');
-    p.textContent = favorites[i];
-    column.appendChild(p);
-    var button = document.createElement('button');
-    button.setAttribute('type', 'submit');
-    button.className = 'go-button inline';
-    button.textContent = 'Go';
-    column.appendChild(button);
-    var icon = document.createElement('i');
-    icon.className = 'fa-solid fa-trash';
-    column.appendChild(icon);
+  if (favorites.length === 0) {
+    var col = document.createElement('div');
+    col.className = 'p-2';
+    $favoritesparent.appendChild(col);
+    var text = document.createElement('p');
+    text.textContent = 'You have not added any airports to your favorites.';
+    text.className = 'd-inline me-5';
+    col.appendChild(text);
+  } else {
+    for (var i = 0; i < favorites.length; i++) {
+      var column = document.createElement('div');
+      column.className = 'p-2';
+      $favoritesparent.appendChild(column);
+      var p = document.createElement('p');
+      p.textContent = favorites[i];
+      p.className = 'd-inline me-5';
+      column.appendChild(p);
+      var button = document.createElement('button');
+      button.setAttribute('type', 'submit');
+      button.className = 'btn btn-primary me-5';
+      button.textContent = 'Go';
+      column.appendChild(button);
+      var icon = document.createElement('i');
+      icon.className = 'fa-solid fa-trash';
+      column.appendChild(icon);
+    }
   }
 }
 
@@ -166,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 $favoritesparent.addEventListener('click', function (event) {
+  $ul.replaceChildren();
   if (event.target.textContent === 'Go') {
     var id = event.target.closest('div');
     var p = id.querySelector('p');
@@ -181,15 +210,15 @@ $favoritesparent.addEventListener('click', function (event) {
 });
 
 $modal.addEventListener('click', function (event) {
-  if (event.target.className === 'confirm') {
+  if (event.target.textContent === 'Confirm') {
     for (var i = 0; i < data.favorites.length; i++) {
       if (data.favorites[i] === data.airport) {
         data.favorites.splice(i, 1);
       }
     }
-    $modalcontainer.className = 'row hidden';
+    $modalcontainer.className = 'container d-none';
     renderFavorites(data.favorites);
-  } else if (event.target.className === 'cancel') {
-    $modalcontainer.className = 'row hidden';
+  } else if (event.target.textContent === 'Cancel') {
+    $modalcontainer.className = 'container d-none';
   }
 });
