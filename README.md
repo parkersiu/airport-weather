@@ -44,4 +44,4 @@ Try the application live at [https://parkersiu.github.io/ajax-project/](https://
     ```
 
 
-1. You can view the application by opening http://localhost:3000 in your browser.
+1. Once the repo is cloned, you can open the application using `live server` or your chosen project opener.
