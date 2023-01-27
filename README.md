@@ -1,6 +1,6 @@
-# airport-info
+# airport-weather
 
-A JavaScript application for pilots who want to view airport weather.
+A dynamic HTML, CSS, and JavaScript application for pilots who want to view airport weather.
 
 ## Why I Built This
 
@@ -15,7 +15,7 @@ As a licensed pilot, I wanted to build an application that shows a simple breakd
 
 ## Live Demo
 
-Try the application live at [https://parkersiu.github.io/ajax-project/](https://parkersiu.github.io/ajax-project/)
+Try the application live at [https://parkersiu.github.io/airport-weather/](https://parkersiu.github.io/airport-weather/)
 
 ## Features
 
@@ -39,7 +39,7 @@ Try the application live at [https://parkersiu.github.io/ajax-project/](https://
 1. Clone the repository.
 
     ```shell
-    git clone https://https://github.com/parkersiu/ajax-project
+    git clone https://https://github.com/parkersiu/airport-weather
     cd ajax-project
     ```
 
